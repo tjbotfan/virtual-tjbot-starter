@@ -33,7 +33,7 @@ stages:
           echo space: ${CF_SPACE}
           echo application: ${CF_APP}
           echo api_key: ${API_KEY}
-          echo resource_group: ${CF_RESOURCE_GROUP}
+          echo resource_group: ${CF_RESOURCE_GROUP_NAME}
           echo ----------------------
           env
           echo ----------------------
@@ -41,7 +41,7 @@ stages:
           REGION=`echo ${CF_REGION_ID} | sed 's/ibm:yp://g'`
 
           ibmcloud login --apikey $API_KEY
-          ibmcloud target -g Default
+          ibmcloud target -g Default -r ${REGION}
           ibmcloud target --cf -o ${CF_ORGANIZATION} -s ${CF_SPACE}
           ibmcloud resource service-instance-create "TJBot_LanguageTranslator" language-translator lite jp-tok
           ibmcloud resource service-instance-create "TJBot_SpeechToText" speech-to-text lite jp-tok
@@ -82,6 +82,6 @@ properties:
   - name: CF_APP
     value: ${CF_APP}
     type: text
-  - name: CF_RESOURCE_GROUP
-    value: ${CF_RESOURCE_GROUP}
+  - name: CF_RESOURCE_GROUP_NAME
+    value: ${CF_RESOURCE_GROUP_NAME}
     type: text
