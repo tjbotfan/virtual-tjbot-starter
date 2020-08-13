@@ -17,6 +17,7 @@
         "node-red-contrib-cos": "0.0.19",
         "node-red-contrib-embedded-file": "0.0.2",
         "node-red-contrib-file-buffer": "0.0.3",
+        "node-red-contrib-google-translate": "0.0.5",
         "node-red-contrib-image-output": "^0.5.2",
         "node-red-contrib-model-asset-exchange": "^0.2.6",
         "node-red-contrib-moment": "^3.0.3",
