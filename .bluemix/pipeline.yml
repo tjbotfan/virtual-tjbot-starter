@@ -35,6 +35,8 @@ stages:
           echo api_key: ${API_KEY}
           echo resource_group: ${CF_RESOURCE_GROUP}
           echo ----------------------
+          env
+          echo ----------------------
 
           REGION=`echo ${CF_REGION_ID} | sed 's/ibm:yp://g'`
 
