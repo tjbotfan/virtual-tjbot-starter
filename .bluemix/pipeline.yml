@@ -1,0 +1,82 @@
+---
+stages:
+  - name: Build
+    inputs:
+      - type: git
+        branch: master
+    triggers:
+      - type: commit
+    jobs:
+      - name: Build
+        type: builder
+  - name: Deploy
+    inputs:
+      - type: job
+        stage: Build
+        job: Build
+    triggers:
+      - type: stage
+    jobs:
+      - name: dev
+        type: deployer
+        script: |-
+          #!/bin/bash -x
+          CLOUDANT_NAME="node-red-shared-cloudant"
+
+          cf push "${CF_APP}" --no-start
+          cf set-env "${CF_APP}" NODE_RED_STORAGE_NAME "${CLOUDANT_NAME}"
+          cf create-service cloudantNoSQLDB lite "${CLOUDANT_NAME}"
+
+          echo ----------------------
+          echo region_id: ${CF_REGION_ID}
+          echo organization: ${CF_ORGANIZATION}
+          echo space: ${CF_SPACE}
+          echo application: ${CF_APP}
+          echo resource_group: ${CF_RESOURCE_GROUP_ID}
+          echo ----------------------
+
+          REGION=`echo ${CF_REGION_ID} | sed 's/ibm:yp://g'`
+          echo ${REGION}
+          echo ----------------------
+          ibmcloud login --apikey $API_KEY -r ${REGION}
+          ibmcloud target -g Default -r ${REGION}
+          ibmcloud target --cf -o ${CF_ORGANIZATION} -s ${CF_SPACE}
+          ibmcloud resource service-instance-create "TJBot_LanguageTranslator" language-translator lite jp-tok
+          ibmcloud resource service-instance-create "TJBot_SpeechToText" speech-to-text lite jp-tok
+          ibmcloud resource service-instance-create "TJBot_TextToSpeech" text-to-speech lite jp-tok
+          ibmcloud resource service-instance-create "TJBot_VisualRecognition" watson-vision-combined lite us-south
+          ibmcloud resource service-instance-create "TJBot_Assistant" conversation free jp-tok
+
+          sleep 120
+
+          cf bind-service "${CF_APP}" "${CLOUDANT_NAME}" -c '{"role":"Manager"}'
+
+          # Start CF Application
+          cf start "${CF_APP}"
+
+          # View logs
+          cf logs "${CF_APP}" --recent
+
+        target:
+          region_id: ${CF_REGION_ID}
+          organization: ${CF_ORGANIZATION}
+          space: ${CF_SPACE}
+          application: ${CF_APP}
+          api_key: ${API_KEY}
+
+properties:
+  - name: API_KEY
+    value: ${API_KEY}
+    type: secure
+  - name: CF_REGION_ID
+    value: ${CF_REGION_ID}
+    type: text
+  - name: CF_ORGANIZATION
+    value: ${CF_ORGANIZATION}
+    type: text
+  - name: CF_SPACE
+    value: ${CF_SPACE}
+    type: text
+  - name: CF_APP
+    value: ${CF_APP}
+    type: text
