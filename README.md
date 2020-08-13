@@ -3,10 +3,10 @@ Virtual TJBot Starter Application
 
 ### Node-RED and Virtual TJBot on IBM Cloud
 
-���̃��|�W�g����Virtual TJBot�𗘗p���邽�߂ɕK�v��Node-RED�̃A�v���P�[�V�����Ɛݒ�E�t���[�f�[�^��IBMCloud �̃A�v���P�[�V�����Ƃ��Đݒ肷�邽�߂̃c�[���W�ł��B
-`Deploy to IBM Cloud` �{�^�����N���b�N����Ɛ�p�̊����쐬����܂��B
+このレポジトリはVirtual TJBotを利用するために必要なNode-REDのアプリケーションと設定・フローデータをIBMCloud のアプリケーションとして設定するためのツール集です。
+`Deploy to IBM Cloud` ボタンをクリックすると専用の環境が作成されます。
 
-�����p�ɂ�IBM Cloud�̃��C�g�A�J�E���g�ȏ�̓o�^���K�v�ɂȂ�܂��B
+※利用にはIBM Cloudのライトアカウント以上の登録が必要になります。
 
 [![Deploy to IBM Cloud](./button.png)](https://bluemix.net/deploy?repository=https://github.com/tjbotfan/virtual-tjbot-starter.git)
 
@@ -17,7 +17,7 @@ Click the `Deploy to IBM Cloud` button to create a dedicated environment.
 
 ### Thanks
 
-���̃v���W�F�N�g�͈ȉ��̃v���W�F�N�g�Ɋ��ӂ��܂��B
+このプロジェクトは以下のプロジェクトに感謝します。
 This project appreciate those projects:
 
 - Node-RED
