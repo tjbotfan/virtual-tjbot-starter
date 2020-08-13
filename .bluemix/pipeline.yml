@@ -26,15 +26,12 @@ stages:
           cf push "${CF_APP}" --no-start
           cf set-env "${CF_APP}" NODE_RED_STORAGE_NAME "${CLOUDANT_NAME}"
           cf create-service cloudantNoSQLDB lite "${CLOUDANT_NAME}"
-          # cf create-service cloudantNoSQLDB lite "${CLOUDANT_NAME}"
-          # cf create-service text_to_speech lite TJBot_TTS
-          # cf create-service speech_to_text lite TJBot_SST
-          # cf create-service watson_vision_combined lite TJBot_VS
-          # cf create-service language_translator lite TJBot_LT
-          # ibmcloud login --apikey $API_KEY --no-region
-          # echo ibmcloud resource service-instance-create node-red-shared-cloudant cloudantnosqldb lite us-south -p \'{\"legacyCredentials\": false}\'
-          # ibmcloud resource service-instance-create node-red-shared-cloudant cloudantnosqldb lite us-south -p \'{\"legacyCredentials\": false}\'
-            
+
+          ibmcloud resource service-instance-create "TJBot_LanguageTranslator" language-translator lite jp-tok
+          ibmcloud resource service-instance-create "TJBot_SpeechToText" speech-to-text lite jp-tok
+          ibmcloud resource service-instance-create "TJBot_TextToSpeech" text-to-speech lite jp-tok
+          ibmcloud resource service-instance-create "TJBot_VisualRecognition" watson-vision-combined lite us-south
+          ibmcloud resource service-instance-create "TJBot_Assistant" conversation free jp-tok
 
           sleep 120
 
