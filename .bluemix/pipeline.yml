@@ -27,7 +27,11 @@ stages:
           cf set-env "${CF_APP}" NODE_RED_STORAGE_NAME "${CLOUDANT_NAME}"
           cf create-service cloudantNoSQLDB lite "${CLOUDANT_NAME}"
 
-          ibmcloud login --apikey $API_KEY --no-region
+          echo ----------------------
+          echo ${CF_REGION_ID}
+          echo ----------------------
+
+          ibmcloud login --apikey $API_KEY -r us-south
           ibmcloud target -g Default
           ibmcloud target --cf
           ibmcloud resource service-instance-create "TJBot_LanguageTranslator" language-translator lite jp-tok
@@ -57,3 +61,9 @@ properties:
   - name: API_KEY
     value: ${API_KEY}
     type: secure
+  - name: REGION
+    value: ${REGION}
+    type: text
+  - name: REGION
+    value: ${REGION}
+    type: text
