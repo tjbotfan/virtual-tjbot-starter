@@ -33,7 +33,7 @@ stages:
           echo space: ${CF_SPACE}
           echo application: ${CF_APP}
           echo api_key: ${API_KEY}
-          echo resource_group: ${CF_RESOURCE_GROUP_NAME}
+          echo resource_group: ${CF_RESOURCE_GROUP_ID}
           echo ----------------------
           env
           echo ----------------------
@@ -83,6 +83,6 @@ properties:
   - name: CF_APP
     value: ${CF_APP}
     type: text
-  - name: CF_RESOURCE_GROUP_NAME
-    value: ${CF_RESOURCE_GROUP_NAME}
+  - name: CF_RESOURCE_GROUP_ID
+    value: ${CF_RESOURCE_GROUP_ID}
     type: text
