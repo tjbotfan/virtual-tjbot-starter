@@ -20,7 +20,7 @@ stages:
       - name: dev
         type: deployer
         script: |-
-          #!/bin/bash
+          #!/bin/bash -x
           CLOUDANT_NAME="node-red-shared-cloudant"
 
           cf push "${CF_APP}" --no-start
@@ -31,7 +31,9 @@ stages:
           # cf create-service speech_to_text lite TJBot_SST
           # cf create-service watson_vision_combined lite TJBot_VS
           # cf create-service language_translator lite TJBot_LT
-          ibmcloud resource service-instance-create node-red-shared-cloudant cloudantnosqldb lite us-south -p {"legacyCredentials": false}
+          # ibmcloud login --apikey $API_KEY --no-region
+          echo ibmcloud resource service-instance-create node-red-shared-cloudant cloudantnosqldb lite us-south -p '{"legacyCredentials": false}'
+          ibmcloud resource service-instance-create node-red-shared-cloudant cloudantnosqldb lite us-south -p \'{\"legacyCredentials\": false}\'
             
 
           sleep 120
