@@ -36,7 +36,7 @@ stages:
           echo resource_group: ${CF_RESOURCE_GROUP}
           echo ----------------------
 
-          REGION=`echo ${CF_REGION_ID} | sed 's/ibm:yp://g`
+          REGION=`echo ${CF_REGION_ID} | sed 's/ibm:yp://g'`
 
           ibmcloud login --apikey $API_KEY
           ibmcloud target -g Default
