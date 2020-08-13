@@ -41,7 +41,7 @@ stages:
           REGION=`echo ${CF_REGION_ID} | sed 's/ibm:yp://g'`
           echo ${REGION}
           echo ----------------------
-          ibmcloud login --apikey $API_KEY
+          ibmcloud login --apikey $API_KEY -r ${REGION}
           ibmcloud target -g Default -r ${REGION}
           ibmcloud target --cf -o ${CF_ORGANIZATION} -s ${CF_SPACE}
           ibmcloud resource service-instance-create "TJBot_LanguageTranslator" language-translator lite jp-tok
