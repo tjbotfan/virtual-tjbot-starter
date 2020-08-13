@@ -28,7 +28,11 @@ stages:
           cf create-service cloudantNoSQLDB lite "${CLOUDANT_NAME}"
 
           echo ----------------------
-          echo ${CF_REGION_ID}
+          echo region_id: ${CF_REGION_ID}
+          echo organization: ${CF_ORGANIZATION}
+          echo space: ${CF_SPACE}
+          echo application: ${CF_APP}
+          echo api_key: ${API_KEY}
           echo ----------------------
 
           ibmcloud login --apikey $API_KEY -r us-south
