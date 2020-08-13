@@ -32,10 +32,7 @@ stages:
           echo organization: ${CF_ORGANIZATION}
           echo space: ${CF_SPACE}
           echo application: ${CF_APP}
-          echo api_key: ${API_KEY}
           echo resource_group: ${CF_RESOURCE_GROUP_ID}
-          echo ----------------------
-          env
           echo ----------------------
 
           REGION=`echo ${CF_REGION_ID} | sed 's/ibm:yp://g'`
@@ -82,7 +79,4 @@ properties:
     type: text
   - name: CF_APP
     value: ${CF_APP}
-    type: text
-  - name: CF_RESOURCE_GROUP_ID
-    value: ${CF_RESOURCE_GROUP_ID}
     type: text
