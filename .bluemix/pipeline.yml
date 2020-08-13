@@ -28,6 +28,8 @@ stages:
           cf create-service cloudantNoSQLDB lite "${CLOUDANT_NAME}"
 
           ibmcloud login --apikey $API_KEY --no-region
+          ibmcloud target -g Default
+          ibmcloud target --cf
           ibmcloud resource service-instance-create "TJBot_LanguageTranslator" language-translator lite jp-tok
           ibmcloud resource service-instance-create "TJBot_SpeechToText" speech-to-text lite jp-tok
           ibmcloud resource service-instance-create "TJBot_TextToSpeech" text-to-speech lite jp-tok
